@@ -24,6 +24,17 @@ app.get('/api/products/:id', async (req) => {
   return db.prepare('SELECT * FROM products WHERE id = ?').get(id);
 });
 
+app.get('/api/force-seed', async () => {
+  // Spawn seed script
+  const { execSync } = await import('child_process');
+  try {
+    execSync('node dist/seed.js');
+    return { success: true, message: 'Database seeded successfully!' };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+});
+
 // Órdenes
 app.post('/api/orders', async (req) => {
   const { items } = req.body as { items: any[] };
