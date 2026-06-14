@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "tsx src/server.ts",
     "seed": "tsx src/seed.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "npm run seed && npm run dev"
   },
   "dependencies": {
     "@fastify/cors": "^10.0.2",
